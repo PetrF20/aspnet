@@ -13,6 +13,7 @@
 <div>
 	<table class="table">
 		<tr>
+			<td>ID</td>
 			<td>Jméno</td>
 			<td>Příjmení</td>
 			<td>Datum narození</td>
@@ -22,6 +23,7 @@
 		@foreach (var person in Model)
 		{
 			<tr>
+				<td> <a href="Detail/@person.Id"> @person.Id </a></td>
 				<td>@person.FirstName</td>
 				<td>@person.LastName</td>
 				<td>@person.DateOfBirth.ToString("dd.MM.yyyy")</td>

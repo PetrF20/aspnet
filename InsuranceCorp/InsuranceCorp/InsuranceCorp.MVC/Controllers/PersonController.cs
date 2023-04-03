@@ -20,7 +20,7 @@ namespace InsuranceCorp.MVC.Controllers
             var top100 = _context.Persons
 			    .Include(person => person.Constracts)
 			    .OrderByDescending(person => person.Constracts.Count())
-			    .Take(100).ToList();
+			    .Take(10).ToList();
 
 			return View(top100);
         }
@@ -33,7 +33,7 @@ namespace InsuranceCorp.MVC.Controllers
                 .Include(person => person.Constracts) //připojí tabulku kontraktů
 				//.OrderBy(person => person.Id)
                 .OrderByDescending(person => person.Constracts.Count())
-				.Take(100).ToList();
+				.Take(10).ToList();
 
 			/*nebo lze rozdělit
             var query = _context.Persons
