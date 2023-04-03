@@ -36,7 +36,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
+    name: "default", //pojmenování cesty, mùžu se na ní dále odkazovat
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
