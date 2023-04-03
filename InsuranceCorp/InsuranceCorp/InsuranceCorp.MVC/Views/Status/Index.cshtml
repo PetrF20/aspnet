@@ -6,6 +6,7 @@
     //vyzvednutí hodnoty ze slovníku, proměnná ok bude dále na této stránce k dispozici
     bool ok = (bool)ViewData["ok"];    
 }
+<h1>Stav připojení DB</h1>
 
 <div class="card card-body">
     @DateTime.Now
@@ -21,7 +22,7 @@
     }
     else
     {
-        <div class="alert alert-dangger" role="alert">
+        <div class="alert alert-danger" role="alert">
             Chyba v připojení k DB
         </div>
     }        
