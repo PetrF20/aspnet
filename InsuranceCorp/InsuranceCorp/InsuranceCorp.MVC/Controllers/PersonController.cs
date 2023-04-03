@@ -1,5 +1,6 @@
 ﻿using InsuranceCorp.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace InsuranceCorp.MVC.Controllers
 {
@@ -19,7 +20,7 @@ namespace InsuranceCorp.MVC.Controllers
             //1. ztískat data - před tím než vrátí view získáme seznam prvních 100 osob 
             var top100 = _context.Persons
                 .OrderBy(person => person.Id)
-                .Take(100).ToList();
+                .Take(1).ToList();
 
             /*nebo lze rozdělit
             var query = _context.Persons
@@ -30,5 +31,26 @@ namespace InsuranceCorp.MVC.Controllers
             //2. zobrzait výsledek uživateli
             return View(top100);
         }
-    }
+
+		public IActionResult Osoby()
+		{
+			//1. ztískat data - před tím než vrátí view získáme seznam prvních 100 osob 
+			//_context.Persons říká, že pracuje jen s touto tabulkou,p okud chci pracovat i s jinou tabulkou, připojím pomocí include
+			var top100 = _context.Persons
+                .Include(person => person.Constracts) //připojí tabulku kontraktů
+				.OrderBy(person => person.Id)
+				.Take(100).ToList();
+
+			/*nebo lze rozdělit
+            var query = _context.Persons
+                .OrderBy(person => person.Id);
+            var top100 = query.Take(100);
+            */
+
+			//2. zobrzait výsledek uživateli
+			return View(top100);
+		}
+
+
+	}
 }

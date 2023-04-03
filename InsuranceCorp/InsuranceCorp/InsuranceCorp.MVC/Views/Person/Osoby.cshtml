@@ -1,0 +1,33 @@
+﻿@model List<Person>
+@*tenhle view je dělaný na to, že zobrazuje konkrétní věc, co posílá model - v našem případě top100 z Controlleru*@
+
+@*@using InsuranceCorp.Model; - přesunuto do _ViewImports.cshtml*@
+
+@{
+	// sekce kódu
+	// např. Model.Count()
+
+}
+
+@*sekce HTML*@
+<div>
+	<table class="table">
+		<tr>
+			<td>Jméno</td>
+			<td>Příjmení</td>
+			<td>Datum narození</td>
+			<td>Email</td>
+			<td>Počet smluv</td>
+		</tr>
+		@foreach (var person in Model)
+		{
+			<tr>
+				<td>@person.FirstName</td>
+				<td>@person.LastName</td>
+				<td>@person.DateOfBirth.ToString("dd.MM.yyyy")</td>
+				<td>@person.Email</td>
+				<td>@person.Constracts.Count()</td>
+			</tr>
+		}
+	</table>
+</div>
