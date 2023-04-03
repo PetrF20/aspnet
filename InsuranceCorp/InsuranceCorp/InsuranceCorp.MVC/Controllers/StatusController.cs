@@ -8,7 +8,7 @@ namespace InsuranceCorp.MVC.Controllers
         private readonly InsCorpDbContext _context; //můžeme použít pro všechny metody
 
         //Inject DB context
-        public StatusController(InsCorpDbContext context)
+        public StatusController(InsCorpDbContext context) //konstruktor
         {
             _context = context;
 
@@ -16,6 +16,10 @@ namespace InsuranceCorp.MVC.Controllers
 
         public IActionResult Index()
         {
+            bool ok = _context.Database.CanConnect(); //ověření  - dokáže se DB připojit??
+
+            ViewData["ok"] = ok; //dictionary na klíči "ok" bude mít hodnotu z proměnné ok
+
             return View();
         }
     }
