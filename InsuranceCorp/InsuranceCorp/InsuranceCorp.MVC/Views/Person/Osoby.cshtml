@@ -23,7 +23,8 @@
 		@foreach (var person in Model)
 		{
 			<tr>
-				<td> <a href="Detail/@person.Id"> @person.Id </a></td>
+				@*				<td> <a href="Detail/@person.Id"> @person.Id </a></td>*@
+				<td> <a asp-asp-controller="Person" asp-action="Detail" asp-route-id="@person.Id"> @person.Id </a></td>
 				<td>@person.FirstName</td>
 				<td>@person.LastName</td>
 				<td>@person.DateOfBirth.ToString("dd.MM.yyyy")</td>
