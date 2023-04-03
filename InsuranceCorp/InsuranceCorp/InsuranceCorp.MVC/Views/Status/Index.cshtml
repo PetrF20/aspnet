@@ -4,16 +4,28 @@
 @{
 
     //vyzvednutí hodnoty ze slovníku, proměnná ok bude dále na této stránce k dispozici
-    bool ok = (bool)ViewData["ok"];
-
+    bool ok = (bool)ViewData["ok"];    
 }
 
 <div class="card card-body">
     @DateTime.Now
     <br />
     <br />
-    Status OK
+    Stav připojení DB:
     <br />
-    DB CanConnect: @ok
+    @if (!ok)
+    {
+        <div class="alert alert-success" role="alert">
+            Připojení k DB OK
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-dangger" role="alert">
+            Chyba v připojení k DB
+        </div>
+    }        
+    @* DB CanConnect: @ok  *@
+
 
 </div>
