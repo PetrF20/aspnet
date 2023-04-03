@@ -46,10 +46,10 @@ namespace InsuranceCorp.MVC.Controllers
 		}
 
 
-		public IActionResult Detail(int id)
+		public IActionResult Detail(int idOsoby)
 		{
 			//1. získat data
-			var person = _context.Persons.Find(id); //pokdu jde o primární klíč, tak je možné hledat přes Find
+			var person = _context.Persons.Find(idOsoby); //pokdu jde o primární klíč, tak je možné hledat přes Find
 
 			//2. zobrazit view
 			return View(person);
