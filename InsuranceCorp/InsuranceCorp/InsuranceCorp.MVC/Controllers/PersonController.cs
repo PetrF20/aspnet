@@ -15,21 +15,14 @@ namespace InsuranceCorp.MVC.Controllers
             _context = context;            
         }
 
-        public IActionResult Index()
+		public IActionResult Index()
         {
-            //1. ztískat data - před tím než vrátí view získáme seznam prvních 100 osob 
             var top100 = _context.Persons
-                .OrderBy(person => person.Id)
-                .Take(1).ToList();
+			    .Include(person => person.Constracts)
+			    .OrderByDescending(person => person.Constracts.Count())
+			    .Take(100).ToList();
 
-            /*nebo lze rozdělit
-            var query = _context.Persons
-                .OrderBy(person => person.Id);
-            var top100 = query.Take(100);
-            */
-
-            //2. zobrzait výsledek uživateli
-            return View(top100);
+			return View(top100);
         }
 
 		public IActionResult Osoby()
@@ -38,7 +31,8 @@ namespace InsuranceCorp.MVC.Controllers
 			//_context.Persons říká, že pracuje jen s touto tabulkou,p okud chci pracovat i s jinou tabulkou, připojím pomocí include
 			var top100 = _context.Persons
                 .Include(person => person.Constracts) //připojí tabulku kontraktů
-				.OrderBy(person => person.Id)
+				//.OrderBy(person => person.Id)
+                .OrderByDescending(person => person.Constracts.Count())
 				.Take(100).ToList();
 
 			/*nebo lze rozdělit
@@ -51,6 +45,15 @@ namespace InsuranceCorp.MVC.Controllers
 			return View(top100);
 		}
 
+
+		public IActionResult Detail(int id)
+		{
+			//1. získat data
+			var person = _context.Persons.Find(id); //pokdu jde o primární klíč, tak je možné hledat přes Find
+
+			//2. zobrazit view
+			return View(person);
+		}
 
 	}
 }
