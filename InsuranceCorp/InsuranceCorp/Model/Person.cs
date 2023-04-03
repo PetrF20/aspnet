@@ -9,8 +9,8 @@ public class Person
 {
     public int Id { get; set; }
 
-    [MaxLength(250)]
-    public string? FirstName { get; set; }
+    [MaxLength(250)] //datová anotace informace pro vytvoření DB
+    public string? FirstName { get; set; } //otazník říká, že je pole nepovinné, tvoří nullable type
     [MaxLength(250)]
 
     public string? LastName { get; set; }
@@ -21,7 +21,7 @@ public class Person
 
     public DateTime DateOfBirth { get; set; }
     public Address? Address { get; set; }
-    public ICollection<Contract> Contracts { get; set; } = new HashSet<Contract>();
-    public override string ToString() => $"{FirstName} {LastName} {Email} {DateOfBirth.ToString("yyyy")} ({Contracts?.Count()}) {Address?.City}";
+    public ICollection<Contract> Constracts { get; set; } = new HashSet<Contract>();
+    public override string ToString() => $"{FirstName} {LastName} {Email} {DateOfBirth.ToString("yyyy")} ({Constracts?.Count()}) {Address?.City}";
 
 }

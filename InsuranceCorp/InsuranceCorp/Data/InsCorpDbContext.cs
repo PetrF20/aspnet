@@ -16,7 +16,7 @@ public partial class InsCorpDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Address> Addresses { get; set; }
+    public virtual DbSet<Address> Addresses { get; set; } //názvy "Adresses" jsou názvy tabulek (pomocí datových anotací můžuzměnit názvy tabulek)
     public virtual DbSet<Contract> Contracts { get; set; }
     public virtual DbSet<Person> Persons { get; set; }
 
