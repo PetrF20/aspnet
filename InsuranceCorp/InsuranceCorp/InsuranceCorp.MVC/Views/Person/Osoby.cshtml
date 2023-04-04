@@ -19,18 +19,20 @@
 			<td>Datum narození</td>
 			<td>Email</td>
 			<td>Počet smluv</td>
+			<td>Edit</td>
 		</tr>
 		@foreach (var person in Model)
 		{
 			<tr>
 				@*	<td> <a href="Detail/@person.Id"> @person.Id </a></td>*@
 				@* asp-route-id - souvisí s parametrem kontroleru "int id" - nebo taky po změně idosoby *@
-				<td> <a asp-asp-controller="Person" asp-action="Detail" asp-route-idosoby="@person.Id"> @person.Id </a></td>
+				<td> <a asp-asp-controller="Person" asp-action="Detail" asp-route-id="@person.Id"> @person.Id </a></td>
 				<td>@person.FirstName</td>
 				<td>@person.LastName</td>
 				<td>@person.DateOfBirth.ToString("dd.MM.yyyy")</td>
 				<td>@person.Email</td>
 				<td>@person.Constracts.Count()</td>
+				<td> <a class="btn btn-primary" asp-asp-controller="Person" asp-action="Edit" asp-route-id="@person.Id"> Upravit </a></td>
 			</tr>
 		}
 	</table>
