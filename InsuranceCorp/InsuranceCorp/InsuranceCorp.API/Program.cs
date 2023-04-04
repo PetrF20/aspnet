@@ -1,3 +1,5 @@
+using InsuranceCorp.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer(); //slouží pro vygenerování open API
 builder.Services.AddSwaggerGen();           //slouží pro vygenerování open API
+
+builder.Services.AddDbContext<InsCorpDbContext>();
 
 var app = builder.Build();
 
