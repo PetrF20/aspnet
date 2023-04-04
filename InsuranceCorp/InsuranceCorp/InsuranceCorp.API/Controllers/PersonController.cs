@@ -163,8 +163,10 @@ namespace InsuranceCorp.API.Controllers
                 .Include(person => person.Contracts)
                 //.Where(person => person.Address.City.ToUpper() == city.ToUpper())
                 .Where(person => person.Address != null && person.Address.City.ToUpper() == city.ToUpper())
-                .Select(person => new {person.FirstName, person.LastName, person.Address.City })
+                .Select(person => new {person.FirstName, person.LastName, person.Address.City })            
                 .ToList());
+
+                //.select / new - vytvoření nového anonymního typu - je vytvořený jen pro toto místo, v "select" je možné zavolat i nějakou metodu
         }
 
 
