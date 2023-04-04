@@ -1,5 +1,7 @@
 ﻿using InsuranceCorp.Data;
 using InsuranceCorp.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,8 +22,8 @@ namespace InsuranceCorp.MVC.Controllers
 		public IActionResult Index()
         {
             var top100 = _context.Persons
-			    .Include(person => person.Constracts)
-			    .OrderByDescending(person => person.Constracts.Count())
+			    .Include(person => person.Contracts)
+			    .OrderByDescending(person => person.Contracts.Count())
 			    .Take(10).ToList();
 
 			return View(top100);
@@ -32,9 +34,9 @@ namespace InsuranceCorp.MVC.Controllers
 			//1. ztískat data - před tím než vrátí view získáme seznam prvních 100 osob 
 			//_context.Persons říká, že pracuje jen s touto tabulkou,p okud chci pracovat i s jinou tabulkou, připojím pomocí include
 			var top100 = _context.Persons
-                .Include(person => person.Constracts) //připojí tabulku kontraktů
+                .Include(person => person.Contracts) //připojí tabulku kontraktů
 				//.OrderBy(person => person.Id)
-                .OrderByDescending(person => person.Constracts.Count())
+                .OrderByDescending(person => person.Contracts.Count())
 				.Take(10).ToList();
 
 			/*nebo lze rozdělit
@@ -67,14 +69,22 @@ namespace InsuranceCorp.MVC.Controllers
 			//2. zobrazit view
 			return View(person);
 		}
-
-		public IActionResult Add() //metoda pro přidání nového prázdného formuláře
+        
+		[Authorize]
+        public IActionResult Add() //metoda pro přidání nového prázdného formuláře
 		{
+			//ověření pžihlášeného uživatele User.Identity.Name == "fabo@seznam.cz"
+			//role role based authorization
+			//[Authorize]
+			//net core itentity user manager
+			//AddClaim
+			//[Authorize RoleManager= ""]
 			return View();
 		}
 
 		[HttpPost] //říká, že následující metoda bude volána jako http post
-		public IActionResult Add(Person person)  //nutno přidat using
+        [Authorize]
+        public IActionResult Add(Person person)  //nutno přidat using
 		{ 
 			// uložit osobu do db
 			_context.Persons.Add(person);
@@ -102,7 +112,8 @@ namespace InsuranceCorp.MVC.Controllers
 
         }
 
-		public IActionResult Edit(int id)
+        [Authorize]
+        public IActionResult Edit(int id)
 		{
 			// najít osobu z DB
 			var person = _context.Persons.Find(id);
@@ -114,6 +125,7 @@ namespace InsuranceCorp.MVC.Controllers
 		}
 
 		[HttpPost]
+		[Authorize] //povolí tuto metoidu /stránku jen pro přihlášené
         public IActionResult Edit(Person form_person) //hodnota, která přišla z formuláře, nejedná se o navázání na db
         {
 			if (!ModelState.IsValid)    //kontrola/validace modelu, jestli jsou zadaná data správná - výsledek validace
@@ -155,7 +167,21 @@ namespace InsuranceCorp.MVC.Controllers
 
 		}
 
+		public IActionResult GetByEmail(string email)
+		{
+            //1. získat / vyheldat data - nelze použít Find
+            //firstordefualt vrací null v případě, že nic nenajde
+            var person = _context.Persons
+				.Where(person => person.Email.ToUpper() == email.ToUpper())
+				.FirstOrDefault();
 
+			if (person == null)
+				return NotFound();
+
+			return View("Detail", person);
+            
+
+        }
 
     }
 }

@@ -7,16 +7,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+//ApplicationDbContext - lokï¿½lnï¿½ DB, kde se uklï¿½dajï¿½ ï¿½ï¿½ty
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+//identity uï¿½ivatele
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>(); //ï¿½daje se majï¿½ uklï¿½dat do DB, kterï¿½ je vytvoï¿½ena dle connectionstring
 builder.Services.AddControllersWithViews();
 
 
-//seznámení, že existuje DBkontext
+//seznï¿½menï¿½, ï¿½e existuje DBkontext
 builder.Services.AddDbContext<InsCorpDbContext>();
 
 var app = builder.Build();
@@ -41,7 +43,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default", //pojmenování cesty, mùžu se na ní dále odkazovat
+    name: "default", //pojmenovï¿½nï¿½ cesty, mï¿½ï¿½u se na nï¿½ dï¿½le odkazovat
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
