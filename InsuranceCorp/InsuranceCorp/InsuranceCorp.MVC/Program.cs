@@ -36,7 +36,7 @@ else
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(); //načítá styly , javascripty, obrázky a další statické soubory
 
 app.UseRouting();
 
