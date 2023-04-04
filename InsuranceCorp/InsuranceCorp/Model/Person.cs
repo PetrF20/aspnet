@@ -10,6 +10,7 @@ public class Person
     public int Id { get; set; }
 
     [MaxLength(250)] //datová anotace informace pro vytvoření DB
+    [Display(Name = "Jméno")]
     public string? FirstName { get; set; } //otazník říká, že je pole nepovinné, tvoří nullable type
     [MaxLength(250)]
 
@@ -19,6 +20,8 @@ public class Person
     [EmailAddress]
     public string? Email { get; set; }
 
+    [Display(Name = "Datum narození")]
+    [DataType(DataType.Date)]
     public DateTime DateOfBirth { get; set; }
     public Address? Address { get; set; }
     public ICollection<Contract> Constracts { get; set; } = new HashSet<Contract>();

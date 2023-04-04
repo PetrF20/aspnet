@@ -116,17 +116,37 @@ namespace InsuranceCorp.MVC.Controllers
 		[HttpPost]
         public IActionResult Edit(Person form_person) //hodnota, která přišla z formuláře, nejedná se o navázání na db
         {
+			if (!ModelState.IsValid)    //kontrola/validace modelu, jestli jsou zadaná data správná - výsledek validace
+            {
+                /*např.
+					ViewData["succes_message"] = "Záznam úspěšně změněn a uložen v DB.";			
+					return View(db_person);
+
+					nebo 
+				ModelState[0].Errors[0].ErrorMessage;
+				*/
+            }
+
             // najít osobu z DB
             var db_person = _context.Persons.Find(form_person.Id);
 
-			// upravit hodnoty v DB (dle toho, co přišlo z formláře)
-			db_person.FirstName = form_person.FirstName;
+            // upravit hodnoty v DB (dle toho, co přišlo z formláře)
+            //1.možnost zápisu            
+            db_person.FirstName = form_person.FirstName;
 			db_person.LastName = form_person.LastName;
 			db_person.Email = form_person.Email;	
 			db_person.DateOfBirth = form_person.DateOfBirth;
-			
-			//uložit do DB
-			_context.SaveChanges();
+
+            //2. možnost zápisu - doporučeno pokud chci přepsat všechny hodnoty, jinak varianta 1
+            //tento příkaz nahradí ruční přiřazení řádků výše (db_person.FirstName = form_person.FirstName; atp.)
+			// přepisuje jen ty property, které mu dojdou z formuláře
+            //_context.Entry(db_person).CurrentValues.SetValues(form_person); 
+
+            //3. možnost zápisu - nahradí přepsání z formuláře do db
+            //_context.Entry(form_person).State = EntityState.Modified;
+
+            //uložit do DB
+            _context.SaveChanges();
 
 
 			//zobrazení - vrátíme info na stejnou stránku
