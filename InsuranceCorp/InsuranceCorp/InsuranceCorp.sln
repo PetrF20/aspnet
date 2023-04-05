@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsuranceCorp.Model", "Mode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceCorp.API", "InsuranceCorp.API\InsuranceCorp.API.csproj", "{7017B30B-A9F3-433E-AE7D-DEAC2C57CC4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalzorApp", "BalzorApp\BalzorApp.csproj", "{D9529CC5-C1B4-4550-8830-6C308FE7D685}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7017B30B-A9F3-433E-AE7D-DEAC2C57CC4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7017B30B-A9F3-433E-AE7D-DEAC2C57CC4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7017B30B-A9F3-433E-AE7D-DEAC2C57CC4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9529CC5-C1B4-4550-8830-6C308FE7D685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9529CC5-C1B4-4550-8830-6C308FE7D685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9529CC5-C1B4-4550-8830-6C308FE7D685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9529CC5-C1B4-4550-8830-6C308FE7D685}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

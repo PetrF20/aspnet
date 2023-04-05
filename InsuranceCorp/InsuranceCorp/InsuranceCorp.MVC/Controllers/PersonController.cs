@@ -167,7 +167,7 @@ namespace InsuranceCorp.MVC.Controllers
 
 		}
 
-		public IActionResult GetByEmail(string email)
+		public IActionResult GetByEmail(string email) //volá se v url s otazníkem
 		{
             //1. získat / vyheldat data - nelze použít Find
             //firstordefualt vrací null v případě, že nic nenajde
