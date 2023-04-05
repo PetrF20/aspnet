@@ -1,0 +1,76 @@
+﻿@page "/person/search"
+@inject InsCorpDbContext context
+
+<h3>Nalezení osoby dle emailu</h3>
+	
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label>Email</label>
+		</div>
+		<div class="col-auto">
+			<InputText @bind-Value="search" class="form-control" />
+		</div>		
+	</div>
+
+	<div class="col-auto">
+	<button class="btn btn-primary" @onclick=searchByEmail>Najít</button>
+	</div>
+
+	<br/>
+
+@if (showProgress)
+{
+	<div>Hledám....</div>
+}
+
+<h5>Výsledek hledání</h5>
+<table class="table table-striped" style="max-width:600px;">
+	<tr>
+		<td>Jméno</td>		
+		<td>Email</td>
+	</tr>
+	@foreach (var person in findresult)
+	{
+		<tr>
+			<td>@person.FirstName @person.LastName</td>
+			<td><a href="/person/detail/@person.Id">@person.Email</a></td>
+		</tr>
+	}
+</table>
+
+@code {
+
+	private Person person = new Person();
+	private string search = "";
+	private bool showProgress = false;
+
+	List<Person> findresult = new List<Person>();
+
+	private void searchByEmail1()
+	{
+		findresult = context.Persons
+				.AsNoTracking() //nechci editovat, můžu použít
+				.Where(person => person.Email.ToUpper().Contains(search.ToUpper()))
+				.Take(100)
+				.ToList();		
+	}
+
+	private async Task searchByEmail()
+	{
+		showProgress = true;
+		
+		StateHasChanged();//obnovení
+
+		//await Task.Delay(1000);
+
+		findresult = await context.Persons
+				.AsNoTracking() //nechci editovat, můžu použít
+				.Where(person => person.Email.ToUpper().Contains(search.ToUpper()))
+				.Take(100)
+				.ToListAsync();
+
+		showProgress = false;
+
+	}
+}
+

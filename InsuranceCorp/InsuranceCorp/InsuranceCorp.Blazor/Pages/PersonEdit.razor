@@ -1,5 +1,6 @@
 ﻿@page "/person/edit/{Id:int}"
 @inject InsCorpDbContext context
+@inject NavigationManager nav
 
 <h3>Editace osoby ID: @Id</h3>
 
@@ -66,7 +67,8 @@
 		try
 		{
 			context.SaveChanges();
-			showSuccess = true;
+			//showSuccess = true;
+			nav.NavigateTo($"/person/detail/{person.Id}");
 		}
 		catch (Exception ex)
 		{
