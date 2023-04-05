@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceCorp.API", "Insura
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalzorApp", "BalzorApp\BalzorApp.csproj", "{D9529CC5-C1B4-4550-8830-6C308FE7D685}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceCorp.Blazor", "InsuranceCorp.Blazor\InsuranceCorp.Blazor.csproj", "{986A2FBC-BF34-4635-ADBE-D25BD283E574}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D9529CC5-C1B4-4550-8830-6C308FE7D685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9529CC5-C1B4-4550-8830-6C308FE7D685}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9529CC5-C1B4-4550-8830-6C308FE7D685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{986A2FBC-BF34-4635-ADBE-D25BD283E574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{986A2FBC-BF34-4635-ADBE-D25BD283E574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{986A2FBC-BF34-4635-ADBE-D25BD283E574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{986A2FBC-BF34-4635-ADBE-D25BD283E574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

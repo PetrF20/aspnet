@@ -1,0 +1,13 @@
+﻿@page "/person/detail/{Id:int}"
+
+<h3>Detial osoby ID: @Id</h3>
+
+@code {
+
+	//předání parametru z url do kódu
+	[Parameter]
+	public int Id { get; set; }
+
+
+
+}

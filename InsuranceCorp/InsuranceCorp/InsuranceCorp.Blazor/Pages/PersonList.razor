@@ -1,0 +1,52 @@
+﻿@page "/person" 
+@*určení stránky url*@
+@using InsuranceCorp.Data
+@using InsuranceCorp.Model
+@using Microsoft.EntityFrameworkCore;
+
+@inject InsCorpDbContext context
+
+<h3>Seznam osob</h3>
+
+<table class="table">
+	<tr>
+		<td>ID</td>
+		<td>Jméno</td>
+		<td>Příjmení</td>
+		<td>Datum narození</td>
+		<td>Email</td>
+		<td>Počet smluv</td>
+		<td>Edit</td>
+	</tr>
+	@foreach (var person in persons)
+	{
+		<tr>
+			@*	<td> <a href="Detail/@person.Id"> @person.Id </a></td>*@
+			@* asp-route-id - souvisí s parametrem kontroleru "int id" - nebo taky po změně idosoby *@
+			<td> <a class="btn btn-primary"> @person.Id </a></td>
+			<td>@person.FirstName</td>
+			<td>@person.LastName</td>
+			<td>@person.DateOfBirth.ToString("dd.MM.yyyy")</td>
+			<td>
+				<a href="/person/detail/@person.Id"> @person.Email </a>
+			</td>
+			<td>@person.Contracts.Count()</td>
+			<td> <a class="btn btn-primary" > Upravit </a></td>
+		</tr>
+	}
+</table>
+
+@code {
+	private List<Person> persons = new List<Person>();
+
+	protected override void OnInitialized()
+	{
+		persons = context.Persons
+			.Include(person => person.Contracts)
+			.Take(10)
+			.ToList();
+	}
+	
+	 
+
+}
